@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Detector</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+    }
+
+    nav {
+      background: #1f1f1f;
+      padding: 15px 0;
+      color: #e0e0e0;
+    }
+
+    .form-control {
+      border-radius: 20px;
+      background: #333;
+      color: #e0e0e0;
+      border: 1px solid #444;
+    }
+
+    .btn {
+      border-radius: 20px;
+      background: #444;
+      color: #e0e0e0;
+      border: none;
+    }
+
+    .btn:hover {
+      background: #555;
+    }
+
+    .weather-data {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      color: #e0e0e0;
+    }
+
+    h1, h3, h5 {
+      color: #e0e0e0;
+    }
+
+    footer {
+      background: #1f1f1f;
+      padding: 10px 0;
+      text-align: center;
+      color: #e0e0e0;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="row text-center">
+    <h1>Weather Detector</h1>
+  </nav>
+
+  <!-- Search Form -->
+  <div class="container">
+    <div class="row">
+      <center>
+        <form action="" method="post" class="col-md-6 col-md-offset-3">
+          {% csrf_token %}
+          <div class="input-group">
+            <input type="text" class="form-control" name="city" placeholder="Enter City Name">
+            <div class="input-group-btn">
+              <button class="btn" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </center>
+    </div>
+
+    <!-- Weather Data -->
+    <div class="row">
+      {% if data.country_code %}
+      <div class="col-md-6 col-md-offset-3 weather-data">
+        <h1>{{ city }}</h1>
+        <h3>Country Code: {{ data.country_code }}</h3>
+        <h5>Coordinates: {{ data.coordinate }}</h5>
+        <h5>Temperature: {{ data.temp }} &#8451;</h5>
+        <h5>Pressure: {{ data.pressure }} hPa</h5>
+        <h5>Humidity: {{ data.humidity }}%</h5>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Weather Detector. All Rights Reserved.</p>
+  </footer>
+
+</body>
+
+</html>
